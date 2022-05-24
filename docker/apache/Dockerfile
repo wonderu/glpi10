@@ -2,7 +2,7 @@ FROM centos:7
 
 MAINTAINER eduardo@fametec.com.br
 
-ENV VERSION 10.0.0-rc3
+ENV VERSION 10.0.0
 
 ENV GLPI_LANG pt_BR
 
@@ -60,12 +60,12 @@ ADD conf.d /etc/httpd/conf.d
 
 # COPY --chown=apache:apache src/glpi /var/www/html
 
-ADD https://github.com/glpi-project/glpi/releases/download/10.0.0-rc3/glpi-10.0.0-rc3.tgz /tmp/
+ADD https://github.com/glpi-project/glpi/releases/download/10.0.0/glpi-10.0.0.tgz /tmp/
 #
-RUN tar -zxf /tmp/glpi-10.0.0-rc3.tgz -C /tmp/ \
+RUN tar -zxf /tmp/glpi-10.0.0.tgz -C /tmp/ \
 	&& mv /tmp/glpi/* /var/www/html/ \
 	&& chown -R apache:apache /var/www/html \
-	&& rm -rf /tmp/glpi-10.0.0-rc3.tgz
+	&& rm -rf /tmp/glpi-10.0.0.tgz
 
 VOLUME [ "/var/www/html/files", "/var/www/html/plugins" ]
 
