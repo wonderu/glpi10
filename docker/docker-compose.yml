@@ -1,7 +1,7 @@
 version: "3.3"
 services:
     mariadb-glpi: 
-        image: wonderu/glpi10:10.0.16-mariadb
+        image: ghcr.io/wonderu/glpi10:upgrade10.0.16-mariadb
         restart: unless-stopped
         volumes: 
           - mariadb-glpi-volume:/var/lib/mysql:rw
@@ -17,7 +17,7 @@ services:
 #
 #
     glpi: 
-        image: wonderu/glpi10:10.0.16
+        image: ghcr.io/wonderu/glpi10:upgrade10.0.16
         restart: unless-stopped
         volumes: 
           - glpi-volume-files:/var/www/html/files:rw
@@ -43,7 +43,7 @@ services:
 # CRON
 #
     crond: 
-        image: wonderu/glpi10:10.0.16-crond
+        image: ghcr.io/wonderu/glpi10:upgrade10.0.16-crond
         restart: unless-stopped
         depends_on:
           - mariadb-glpi

@@ -95,7 +95,7 @@ InstallRepo () {
 
   yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
 
-  yum-config-manager --enable remi-php73
+  yum-config-manager --enable remi-php74
 
   cat <<EOF > /etc/yum.repos.d/MariaDB.repo
 
