@@ -5,7 +5,7 @@ services:
 #
     mariadb-glpi: 
         build: mariadb/
-        image: fametec/glpi:9.5.6-mariadb
+        image: wonderu/glpi10:10.0.16-mariadb
         restart: unless-stopped
         # volumes: 
         #  - mariadb-glpi-volume:/var/lib/mysql:rw
@@ -15,7 +15,7 @@ services:
           MYSQL_PASSWORD: glpi-pass 
           MYSQL_RANDOM_ROOT_PASSWORD: 1 
         ports: 
-          - 3306:3306
+          - 127.0.0.1:3306:3306
         networks: 
           - glpi-backend
 #
@@ -23,25 +23,25 @@ services:
 #
     glpi: 
         build: apache/
-        image: fametec/glpi:9.5.6
+        image: wonderu/glpi10:10.0.16
         restart: unless-stopped
         # volumes: 
         #  - glpi-volume-files:/var/www/html/files:rw
         #  - glpi-volume-plugins:/var/www/html/plugins:rw
         #  - glpi-volume-config:/var/www/html/config:rw
         environment: 
-          GLPI_LANG: pt_BR
+          GLPI_LANG: en_US
           MARIADB_HOST: mariadb-glpi
           MARIADB_PORT: 3306
           MARIADB_DATABASE: glpi
           MARIADB_USER: glpi-user
           MARIADB_PASSWORD: glpi-pass
-          VERSION: "9.5.6"
+          VERSION: "10.0.16"
           PLUGINS: "all"
         depends_on: 
           - mariadb-glpi
         ports: 
-          - "80:80"
+          - "127.0.0.1:8901:80"
         networks: 
           - glpi-frontend
           - glpi-backend
@@ -50,7 +50,7 @@ services:
 #
     cronjob: 
         build: crond/
-        image: fametec/glpi:9.5.6-crond
+        image: wonderu/glpi10:10.0.16-crond
         restart: unless-stopped
         depends_on: 
           - glpi

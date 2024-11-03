@@ -1,0 +1,60 @@
+name: Build
+
+on:
+  workflow_dispatch:
+  push:
+
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: ${{ github.repository }}
+
+jobs:
+  build:
+    runs-on: ubuntu-22.04
+
+    steps:
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Checkout
+        uses: actions/checkout@v4.1.1
+        env:
+          GIT_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          fetch-depth: 0
+      - name: Log in to the Container registry
+        uses: docker/login-action@v3.0.0
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+            images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+
+      - name: Build and push GLPI Docker image
+        uses: docker/build-push-action@v5.3.0
+        with:
+            context: docker/apache
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}
+            labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push GLPI-CROND Docker image
+        uses: docker/build-push-action@v5.3.0
+        with:
+            context: docker/crond
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}-crond
+            labels: ${{ steps.meta.outputs.labels }}
+
+      - name: Build and push GLPI-MARIADB Docker image
+        uses: docker/build-push-action@v5.3.0
+        with:
+            context: docker/mariadb
+            push: true
+            tags: ${{ steps.meta.outputs.tags }}-mariadb
+            labels: ${{ steps.meta.outputs.labels }}

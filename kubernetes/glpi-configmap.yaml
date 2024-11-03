@@ -3,6 +3,6 @@ kind: ConfigMap
 metadata: 
   name: glpi-config
 data: 
-  GLPI_LANG: "pt_BR"
-  VERSION: "9.5.6"
+  GLPI_LANG: "en_US"
+  VERSION: "10.0.16"
   PLUGINS: "all"

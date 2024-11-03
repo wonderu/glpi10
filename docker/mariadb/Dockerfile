@@ -1,4 +1,4 @@
-FROM docker.io/mariadb:10.4
+FROM docker.io/mariadb:10.11
 #
 ENV MYSQL_RANDOM_ROOT_PASSWORD yes
 ENV MYSQL_DATABASE glpi

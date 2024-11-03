@@ -67,7 +67,7 @@ contato@fametec.com.br
     -e MARIADB_DATABASE=glpi \
     -e MARIADB_USER=glpi \
     -e MARIADB_PASSWORD=glpi \
-    -e VERSION="9.5.6" \
+    -e VERSION="10.0.16" \
     -e PLUGINS="all" \
     -p 80:80 \
     -p 443:443 \
@@ -115,7 +115,7 @@ contato@fametec.com.br
               MARIADB_DATABASE: glpi
               MARIADB_USER: glpi-user
               MARIADB_PASSWORD: glpi-pass
-              VERSION: "9.5.6"
+              VERSION: "10.0.16"
               PLUGINS: "all"
             depends_on: 
               - mariadb-glpi
