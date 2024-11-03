@@ -18,6 +18,7 @@ ENV MARIADB_PASSWORD glpi
 
 WORKDIR /var/www/html
 
+RUN yum -y update
 RUN yum -y install epel-release yum-utils
 
 RUN yum -y install http://rpms.remirepo.net/enterprise/remi-release-7.rpm
