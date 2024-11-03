@@ -1,4 +1,4 @@
-FROM wonderu/glpi10:10.0.16
+FROM wonderu/glpi10:upgrade10.0.16
 
 RUN yum -y install cronie mariadb
  
